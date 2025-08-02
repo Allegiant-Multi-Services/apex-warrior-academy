@@ -2501,24 +2501,29 @@ Comprehensive Responsive Design
 }
 
 .auth-info {
-    background: rgba(212, 175, 55, 0.15);
-    border: 2px solid var(--color-accent);
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid var(--color-accent);
     border-radius: 10px;
     padding: 1.5rem;
     margin-top: 1rem;
-    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .auth-info p {
     margin: 0.5rem 0;
-    color: #2c3e50;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    font-weight: 500;
+    color: #1a1a1a;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 600;
 }
 
 .auth-info p:first-child {
     margin-top: 0;
+    color: #d4af37;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .auth-info p:last-child {
