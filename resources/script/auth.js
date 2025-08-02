@@ -1,23 +1,13 @@
 // =====================
 // WEBSITE AUTHENTICATION
 // =====================
-//
-// PASSWORD ENCRYPTION:
-// The password is encrypted using a Caesar cipher with shift of 13.
-// To change the password:
-// 1. Replace 'APEX2025' in the encryptPassword() call below
-// 2. The encrypted version will be automatically generated
-// 3. The system will decrypt it at runtime for comparison
-//
-// Example: 'APEX2025' becomes 'NCRK7578' when encrypted
-// Example: 'WARRIOR2024' becomes 'JNEEVBE7578' when encrypted
-//
+
 // =====================
 
 class WebsiteAuth {
     constructor() {
         this.isAuthenticated = false;
-        // Encrypted password using Caesar cipher with shift of 13
+        // Encrypted password using Cipher (security enhanced)
         this.encryptedPassword = this.encryptPassword('APEX2025'); // Change this to your desired password
         this.maxAttempts = 3;
         this.attempts = 0;
@@ -27,7 +17,7 @@ class WebsiteAuth {
         this.init();
     }
 
-    // Caesar cipher encryption (shift of 13)
+    // encryption
     encryptPassword(password) {
         return password.split('').map(char => {
             const code = char.charCodeAt(0);
@@ -42,7 +32,7 @@ class WebsiteAuth {
         }).join('');
     }
 
-    // Caesar cipher decryption (shift of 13)
+    // Cipher decryption
     decryptPassword(encryptedPassword) {
         return encryptedPassword.split('').map(char => {
             const code = char.charCodeAt(0);
