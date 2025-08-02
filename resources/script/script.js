@@ -10,6 +10,7 @@ function initializeApexWarriorAcademy() {
     initializeNavigation();
     initializeHamburger();
     initializeDropdowns();
+    setActiveNavigationState();
   } catch (error) {
     console.error("Error initializing Apex Warrior Academy:", error);
   }
@@ -176,6 +177,33 @@ function initializeDropdowns() {
       });
     });
   });
+}
+
+// =====================
+// NAVIGATION STATE MANAGEMENT
+// =====================
+function setActiveNavigationState() {
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll('.nav-links a');
+  
+  // Remove all active classes first
+  navLinks.forEach(link => link.classList.remove('active'));
+  
+  // Set active state based on current page
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && currentPath.endsWith(href)) {
+      link.classList.add('active');
+    }
+  });
+  
+  // Special handling for index.html
+  if (currentPath.endsWith('/') || currentPath.endsWith('/index.html')) {
+    const homeLink = document.querySelector('.nav-links a[href="index.html"]');
+    if (homeLink) {
+      homeLink.classList.add('active');
+    }
+  }
 }
 
 // =====================
