@@ -185,9 +185,11 @@ function initializeDropdowns() {
 function setActiveNavigationState() {
   const currentPath = window.location.pathname;
   const navLinks = document.querySelectorAll('.nav-links a');
+  const dropdowns = document.querySelectorAll('.dropdown');
   
   // Remove all active classes first
   navLinks.forEach(link => link.classList.remove('active'));
+  dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
   
   // Set active state based on current page
   navLinks.forEach(link => {
@@ -204,6 +206,14 @@ function setActiveNavigationState() {
       homeLink.classList.add('active');
     }
   }
+  
+  // Ensure dropdowns are closed on page load
+  dropdowns.forEach(dropdown => {
+    const toggle = dropdown.querySelector('.dropdown-toggle');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
 }
 
 // =====================
