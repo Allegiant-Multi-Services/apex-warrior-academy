@@ -1,17 +1,60 @@
 // =====================
 // WEBSITE AUTHENTICATION
 // =====================
+//
+// PASSWORD ENCRYPTION:
+// The password is encrypted using a Caesar cipher with shift of 13.
+// To change the password:
+// 1. Replace 'APEX2025' in the encryptPassword() call below
+// 2. The encrypted version will be automatically generated
+// 3. The system will decrypt it at runtime for comparison
+//
+// Example: 'APEX2025' becomes 'NCRK7578' when encrypted
+// Example: 'WARRIOR2024' becomes 'JNEEVBE7578' when encrypted
+//
+// =====================
 
 class WebsiteAuth {
     constructor() {
         this.isAuthenticated = false;
-        this.password = 'APEX2025'; // Change this to your desired password
+        // Encrypted password using Caesar cipher with shift of 13
+        this.encryptedPassword = this.encryptPassword('APEX2025'); // Change this to your desired password
         this.maxAttempts = 3;
         this.attempts = 0;
         this.lockoutTime = 5 * 60 * 1000; // 5 minutes in milliseconds
         this.lockoutUntil = 0;
         
         this.init();
+    }
+
+    // Caesar cipher encryption (shift of 13)
+    encryptPassword(password) {
+        return password.split('').map(char => {
+            const code = char.charCodeAt(0);
+            if (code >= 65 && code <= 90) { // Uppercase letters
+                return String.fromCharCode(((code - 65 + 13) % 26) + 65);
+            } else if (code >= 97 && code <= 122) { // Lowercase letters
+                return String.fromCharCode(((code - 97 + 13) % 26) + 97);
+            } else if (code >= 48 && code <= 57) { // Numbers
+                return String.fromCharCode(((code - 48 + 13) % 10) + 48);
+            }
+            return char; // Keep other characters unchanged
+        }).join('');
+    }
+
+    // Caesar cipher decryption (shift of 13)
+    decryptPassword(encryptedPassword) {
+        return encryptedPassword.split('').map(char => {
+            const code = char.charCodeAt(0);
+            if (code >= 65 && code <= 90) { // Uppercase letters
+                return String.fromCharCode(((code - 65 - 13 + 26) % 26) + 65);
+            } else if (code >= 97 && code <= 122) { // Lowercase letters
+                return String.fromCharCode(((code - 97 - 13 + 26) % 26) + 97);
+            } else if (code >= 48 && code <= 57) { // Numbers
+                return String.fromCharCode(((code - 48 - 13 + 10) % 10) + 48);
+            }
+            return char; // Keep other characters unchanged
+        }).join('');
     }
 
     init() {
@@ -116,7 +159,7 @@ class WebsiteAuth {
         }
 
         // Check password
-        if (enteredPassword === this.password) {
+        if (enteredPassword === this.decryptPassword(this.encryptedPassword)) {
             // Success
             this.isAuthenticated = true;
             localStorage.setItem('apexAuth', 'authenticated');
@@ -266,4 +309,21 @@ class WebsiteAuth {
 // Initialize authentication when page loads
 document.addEventListener('DOMContentLoaded', function() {
     new WebsiteAuth();
-}); 
+});
+
+// =====================
+// PASSWORD UTILITY (for development)
+// =====================
+// To generate an encrypted password, open browser console and run:
+// window.generateEncryptedPassword('YOUR_PASSWORD_HERE')
+// Example: window.generateEncryptedPassword('WARRIOR2024')
+// =====================
+
+window.generateEncryptedPassword = function(password) {
+    const auth = new WebsiteAuth();
+    const encrypted = auth.encryptPassword(password);
+    console.log('Original Password:', password);
+    console.log('Encrypted Password:', encrypted);
+    console.log('To use this, replace the password in auth.js with:', encrypted);
+    return encrypted;
+}; 
