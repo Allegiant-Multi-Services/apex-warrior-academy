@@ -15,6 +15,9 @@ class WebsiteAuth {
     }
 
     init() {
+        // Hide content immediately to prevent flash
+        this.hideContent();
+        
         // Check if user is already authenticated
         const authStatus = localStorage.getItem('apexAuth');
         if (authStatus === 'authenticated') {
@@ -61,7 +64,7 @@ class WebsiteAuth {
                         <div id="error-message" class="error-message" style="display: none;"></div>
                         
                         <div class="auth-info">
-                            <p><strong>⚠️ Security Notice:</strong></p>
+                            <p><strong>⚠️ SECURITY NOTICE:</strong></p>
                             <p>This website contains sensitive military study materials. Access is restricted to authorized personnel only.</p>
                             <p>If you need access, contact your unit administrator.</p>
                         </div>
@@ -241,6 +244,9 @@ class WebsiteAuth {
         if (main) main.style.display = 'block';
         if (header) header.style.display = 'block';
         if (footer) footer.style.display = 'block';
+        
+        // Remove any auth overlay if it exists
+        this.removeAuthOverlay();
     }
 
     removeAuthOverlay() {
