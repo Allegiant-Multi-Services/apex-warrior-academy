@@ -541,7 +541,7 @@ Section Styles
   color: var(--color-link-hover);
 }
 
-/* Specific styling for View Resources links on homepage */
+/* Specific styling for View Resources links on homepage - COMMENTED OUT
 #security-resources-link,
 #network-resources-link,
 #blc-resources-link,
@@ -555,7 +555,7 @@ Section Styles
 #blc-resources-link:hover,
 #board-resources-link:hover{
   color: #93c5fd !important;
-}
+} */
 
 
 
