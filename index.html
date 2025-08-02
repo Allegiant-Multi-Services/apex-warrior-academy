@@ -50,8 +50,15 @@
       <!-- Navigation Links -->
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="securityplus.html">Security+</a></li>
-        <li><a href="networkplus.html">Network+</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Certifications <span class="dropdown-arrow">▼</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="securityplus.html">Security+</a></li>
+            <li><a href="networkplus.html">Network+</a></li>
+          </ul>
+        </li>
         <li><a href="blc.html">BLC</a></li>
         <li><a href="boardprep.html">Board Prep</a></li>
         <li><a href="about.html">About Us</a></li>
@@ -91,28 +98,38 @@
 
   <!-- Main Sections -->
   <main class="container">
-    <section id="security+" class="content-section">
-      <h3>Security+</h3>
-      <p>Access flashcards, practice tests, and study guides tailored for the CompTIA Security+ exam.</p>
-      <a href="securityplus.html" id="security-resources-link">View Resources</a>
+    <section id="certifications" class="content-section">
+      <h3>IT Certifications</h3>
+      <p>Professional IT certification resources to advance your technical career in the military.</p>
+      <div class="cert-grid">
+        <div class="cert-item">
+          <h4>Security+</h4>
+          <p>Access flashcards, practice tests, and study guides tailored for the CompTIA Security+ exam.</p>
+          <a href="securityplus.html" id="security-resources-link">View Resources</a>
+        </div>
+        <div class="cert-item">
+          <h4>Network+</h4>
+          <p>Structured materials covering everything from basic networking to troubleshooting and configuration.</p>
+          <a href="networkplus.html" id="network-resources-link">View Resources</a>
+        </div>
+      </div>
     </section>
 
-    <section id="network+" class="content-section">
-      <h3>Network+</h3>
-      <p>Structured materials covering everything from basic networking to troubleshooting and configuration.</p>
-      <a href="networkplus.html" id="network-resources-link">View Resources</a>
-    </section>
-
-    <section id="blc" class="content-section">
-      <h3>Basic Leadership Course (BLC)</h3>
-      <p>Prepare for BLC with mock essays, leadership tools, and Army writing examples.</p>
-      <a href="blc.html" id="blc-resources-link">View Resources</a>
-    </section>
-
-    <section id="board" class="content-section">
-      <h3>Promotion Board Preparation</h3>
-      <p>Access Army Study Guides, Soldier of the Month material, and common board questions.</p>
-      <a href="boardprep.html" id="board-resources-link">View Resources</a>
+    <section id="military-training" class="content-section">
+      <h3>Military Training</h3>
+      <p>Leadership development and professional military education resources.</p>
+      <div class="training-grid">
+        <div class="training-item">
+          <h4>Basic Leadership Course (BLC)</h4>
+          <p>Prepare for BLC with mock essays, leadership tools, and Army writing examples.</p>
+          <a href="blc.html" id="blc-resources-link">View Resources</a>
+        </div>
+        <div class="training-item">
+          <h4>Promotion Board Preparation</h4>
+          <p>Access Army Study Guides, Soldier of the Month material, and common board questions.</p>
+          <a href="boardprep.html" id="board-resources-link">View Resources</a>
+        </div>
+      </div>
     </section>
   </main>
 

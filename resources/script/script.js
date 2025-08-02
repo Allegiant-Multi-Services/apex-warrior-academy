@@ -9,6 +9,7 @@ function initializeApexWarriorAcademy() {
   try {
     initializeNavigation();
     initializeHamburger();
+    initializeDropdowns();
   } catch (error) {
     console.error("Error initializing Apex Warrior Academy:", error);
   }
@@ -77,6 +78,90 @@ function initializeHamburger() {
       hamburger.setAttribute('aria-expanded', 'false');
       hamburger.textContent = '☰';
     }
+  });
+}
+
+// =====================
+// DROPDOWN MENU FUNCTIONALITY
+// =====================
+function initializeDropdowns() {
+  const dropdowns = document.querySelectorAll('.dropdown');
+  
+  if (!dropdowns.length) {
+    console.warn("No dropdown menus found");
+    return;
+  }
+
+  dropdowns.forEach(dropdown => {
+    const toggle = dropdown.querySelector('.dropdown-toggle');
+    const menu = dropdown.querySelector('.dropdown-menu');
+    
+    if (!toggle || !menu) {
+      console.warn("Dropdown elements not found");
+      return;
+    }
+
+    // Toggle dropdown on click
+    toggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      const isActive = dropdown.classList.contains('active');
+      
+      // Close all other dropdowns
+      dropdowns.forEach(otherDropdown => {
+        if (otherDropdown !== dropdown) {
+          otherDropdown.classList.remove('active');
+          const otherToggle = otherDropdown.querySelector('.dropdown-toggle');
+          if (otherToggle) {
+            otherToggle.setAttribute('aria-expanded', 'false');
+          }
+        }
+      });
+      
+      // Toggle current dropdown
+      dropdown.classList.toggle('active');
+      toggle.setAttribute('aria-expanded', !isActive);
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (event) => {
+      if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Handle keyboard navigation
+    toggle.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggle.click();
+      } else if (event.key === 'Escape') {
+        dropdown.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Handle dropdown menu item keyboard navigation
+    const menuItems = menu.querySelectorAll('a');
+    menuItems.forEach((item, index) => {
+      item.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          const nextItem = menuItems[index + 1] || menuItems[0];
+          nextItem.focus();
+        } else if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          const prevItem = menuItems[index - 1] || menuItems[menuItems.length - 1];
+          prevItem.focus();
+        } else if (event.key === 'Escape') {
+          dropdown.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+    });
   });
 }
 
