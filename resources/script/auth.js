@@ -51,23 +51,26 @@ class WebsiteAuth {
         // Hide content immediately to prevent flash
         this.hideContent();
         
-        // Check if user is already authenticated
-        const authStatus = localStorage.getItem('apexAuth');
-        if (authStatus === 'authenticated') {
-            this.isAuthenticated = true;
-            this.showContent();
-            return;
-        }
+        // Add a small delay to ensure DOM is ready
+        setTimeout(() => {
+            // Check if user is already authenticated
+            const authStatus = localStorage.getItem('apexAuth');
+            if (authStatus === 'authenticated') {
+                this.isAuthenticated = true;
+                this.showContent();
+                return;
+            }
 
-        // Check if user is locked out
-        const lockoutUntil = localStorage.getItem('apexLockoutUntil');
-        if (lockoutUntil && Date.now() < parseInt(lockoutUntil)) {
-            this.showLockoutScreen();
-            return;
-        }
+            // Check if user is locked out
+            const lockoutUntil = localStorage.getItem('apexLockoutUntil');
+            if (lockoutUntil && Date.now() < parseInt(lockoutUntil)) {
+                this.showLockoutScreen();
+                return;
+            }
 
-        // Show login screen
-        this.showLoginScreen();
+            // Show login screen
+            this.showLoginScreen();
+        }, 10);
     }
 
     showLoginScreen() {
@@ -258,14 +261,23 @@ class WebsiteAuth {
     }
 
     hideContent() {
-        // Hide main content
+        // Hide main content aggressively
         const main = document.querySelector('main');
         const header = document.querySelector('header');
         const footer = document.querySelector('footer');
         
-        if (main) main.style.display = 'none';
-        if (header) header.style.display = 'none';
-        if (footer) footer.style.display = 'none';
+        if (main) {
+            main.style.display = 'none';
+            main.style.visibility = 'hidden';
+        }
+        if (header) {
+            header.style.display = 'none';
+            header.style.visibility = 'hidden';
+        }
+        if (footer) {
+            footer.style.display = 'none';
+            footer.style.visibility = 'hidden';
+        }
     }
 
     showContent() {
@@ -274,9 +286,18 @@ class WebsiteAuth {
         const header = document.querySelector('header');
         const footer = document.querySelector('footer');
         
-        if (main) main.style.display = 'block';
-        if (header) header.style.display = 'block';
-        if (footer) footer.style.display = 'block';
+        if (main) {
+            main.style.display = 'block';
+            main.style.visibility = 'visible';
+        }
+        if (header) {
+            header.style.display = 'block';
+            header.style.visibility = 'visible';
+        }
+        if (footer) {
+            footer.style.display = 'block';
+            footer.style.visibility = 'visible';
+        }
         
         // Remove any auth overlay if it exists
         this.removeAuthOverlay();
