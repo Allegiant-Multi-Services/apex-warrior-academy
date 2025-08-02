@@ -19,7 +19,7 @@ function initializeApexWarriorAcademy() {
 // NAVIGATION FUNCTIONALITY
 // =====================
 function initializeNavigation() {
-  const navLinks = document.querySelectorAll('.nav-links a');
+  const navLinks = document.querySelectorAll('.nav-links a:not(.dropdown-toggle)');
   
   if (!navLinks.length) {
     console.warn("No navigation links found");
@@ -28,6 +28,11 @@ function initializeNavigation() {
 
   navLinks.forEach(link => {
     link.addEventListener('click', function (event) {
+      // Skip dropdown toggle links
+      if (this.classList.contains('dropdown-toggle')) {
+        return;
+      }
+      
       // Remove 'active' from all links
       navLinks.forEach(nav => nav.classList.remove('active'));
 
@@ -147,7 +152,8 @@ function initializeDropdowns() {
     const menuItems = menu.querySelectorAll('a');
     menuItems.forEach((item, index) => {
       // Close dropdown when menu item is clicked
-      item.addEventListener('click', () => {
+      item.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevent event bubbling
         dropdown.classList.remove('active');
         toggle.setAttribute('aria-expanded', 'false');
       });

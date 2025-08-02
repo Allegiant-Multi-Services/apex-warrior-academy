@@ -1879,6 +1879,7 @@ Comprehensive Responsive Design
 .dropdown-menu li {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .dropdown-menu a {
@@ -1903,6 +1904,14 @@ Comprehensive Responsive Design
   color: var(--color-primary);
 }
 
+/* Ensure no list styling in dropdown */
+.dropdown-menu,
+.dropdown-menu ul,
+.dropdown-menu li {
+  list-style: none;
+  list-style-type: none;
+}
+
 /* Mobile Dropdown Styles */
 @media (max-width: 768px) {
   .dropdown-menu {
@@ -1916,6 +1925,7 @@ Comprehensive Responsive Design
     padding: 0;
     margin-left: var(--spacing-md);
     display: none;
+    list-style: none;
   }
   
   .dropdown.active .dropdown-menu {
