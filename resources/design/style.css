@@ -1867,6 +1867,7 @@ Comprehensive Responsive Design
   transition: all var(--transition-normal);
   z-index: 1000;
   padding: var(--spacing-sm) 0;
+  margin-top: 2px;
 }
 
 .dropdown.active .dropdown-menu {
@@ -1888,10 +1889,16 @@ Comprehensive Responsive Design
   transition: var(--transition-fast);
   border: none;
   background: transparent;
+  position: relative;
 }
 
 .dropdown-menu a:hover,
 .dropdown-menu a:focus {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.dropdown-menu a.active {
   background: var(--color-accent);
   color: var(--color-primary);
 }
@@ -1917,7 +1924,6 @@ Comprehensive Responsive Design
   
   .dropdown-menu a {
     padding: var(--spacing-xs) var(--spacing-md);
-    border-left: 2px solid var(--color-accent);
     margin-left: var(--spacing-sm);
   }
   

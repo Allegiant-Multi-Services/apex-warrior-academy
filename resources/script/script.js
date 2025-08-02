@@ -143,9 +143,16 @@ function initializeDropdowns() {
       }
     });
 
-    // Handle dropdown menu item keyboard navigation
+    // Handle dropdown menu item clicks and keyboard navigation
     const menuItems = menu.querySelectorAll('a');
     menuItems.forEach((item, index) => {
+      // Close dropdown when menu item is clicked
+      item.addEventListener('click', () => {
+        dropdown.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+
+      // Handle keyboard navigation
       item.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowDown') {
           event.preventDefault();
