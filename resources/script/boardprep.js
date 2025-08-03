@@ -11,6 +11,10 @@ const boardPrepFlashcards = [
     { question: "What is the purpose of an NCOER?", answer: "To provide a fair, accurate, and complete evaluation of a Soldier's performance and potential." },
     { question: "What are the Army Leadership Requirements Model attributes?", answer: "Character, Presence, and Intellect." },
     { question: "What are the Army Leadership Requirements Model competencies?", answer: "Lead, Develop, and Achieve." },
+    { question: "What are the 8 Task Troop Leading Procedures", answer: "Receive the mission, Issue the WARNO, Make a Tentative Plan, Initiate Movement, Conduct RECON, Complete the Plan, Issue the OPORD, Supervise and Refine." },
+    { question: "What is the 8 Step Training Module?", answer: "Plan the training event, Certify the trainers, Conduct RECON, issue the OPORD, Rehearse, Execute, Conduct AAR, and Retrain." },
+    { question: "What is the LRM", answer: "Leadership Requirement Model; identifies core attributes and competencies of a leader; BE, KNOW, DO." },
+    { question: "", answer: "" },
     
     // Army Regulations and Policies
     { question: "What regulation covers the Army Body Composition Program?", answer: "AR 600-9 (Army Body Composition Program)" },
@@ -43,6 +47,9 @@ const boardPrepFlashcards = [
     { question: "What is the Army's definition of leadership?", answer: "The process of influencing people by providing purpose, direction, and motivation to accomplish the mission and improve the organization." },
     { question: "What are the four types of Army discipline?", answer: "Self-discipline, Unit discipline, Imposed discipline, and Situational discipline." },
     { question: "What is the purpose of an after-action review (AAR)?", answer: "To identify what happened, why it happened, and how to sustain strengths and improve on weaknesses." },
+    { question: "Which Army Training Circular (TC) covers the NCO Guide?", answer: "TC 7.22-7" },
+    { question:"", answer:""},
+    { question:"", answer:""},
     
     // Current Events and Army Knowledge
     { question: "What is the Army's current focus on modernization?", answer: "The Army is focused on modernization through six priorities: Long-Range Precision Fires, Next-Generation Combat Vehicle, Future Vertical Lift, Army Network, Air and Missile Defense, and Soldier Lethality." },
