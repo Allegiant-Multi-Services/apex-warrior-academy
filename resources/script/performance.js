@@ -120,8 +120,8 @@ ApexWarriorAcademy.Performance = {
         console.warn('Image failed to load:', img.src);
       });
 
-      // Add loading animation
-      if (img.loading === 'lazy') {
+      // Add loading animation only for lazy-loaded images that are not the navbar logo
+      if (img.loading === 'lazy' && !img.closest('.nav-brand')) {
         img.style.opacity = '0';
         img.style.transition = 'opacity 0.3s ease-in';
         
