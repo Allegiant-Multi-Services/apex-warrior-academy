@@ -125,34 +125,7 @@ const boardPrepFlashcards = [
     { question: "Why was Fort Liberty changed back to Fort Bragg?", answer: "In honor of WW2 paratrooper and Silver Star recipient PFC Roland L. Bragg."},
     { question: "When was the Army founded?", answer: "June 14th, 1775"},
     { question: "Oldest component of the Army", answer: "The Army National Guard"},
-    { question: "Deadliest war in United States history", answer: "The Civil War"},
-    
-    // Additional Board Prep Questions
-    { question: "What is the Army's current strength?", answer: "Approximately 485,000 active duty Soldiers" },
-    { question: "What is the Army's motto?", answer: "This We'll Defend" },
-    { question: "What is the Army's birthday?", answer: "June 14, 1775" },
-    { question: "What is the Army's song?", answer: "The Army Goes Rolling Along" },
-    { question: "What is the Army's official colors?", answer: "Black and Gold" },
-    { question: "What is the Army's official flower?", answer: "The American Beauty Rose" },
-    { question: "What is the Army's official tree?", answer: "The Oak Tree" },
-    { question: "What is the Army's official bird?", answer: "The Bald Eagle" },
-    { question: "What is the Army's official fish?", answer: "The American Shad" },
-    { question: "What is the Army's official gemstone?", answer: "The Pearl" },
-    { question: "What is the Army's official mineral?", answer: "The Granite" },
-    { question: "What is the Army's official soil?", answer: "The Terra Rossa" },
-    { question: "What is the Army's official tartan?", answer: "The Army Tartan" },
-    { question: "What is the Army's official march?", answer: "The Army Goes Rolling Along" },
-    { question: "What is the Army's official hymn?", answer: "The Army Hymn" },
-    { question: "What is the Army's official prayer?", answer: "The Army Prayer" },
-    { question: "What is the Army's official creed?", answer: "The Soldier's Creed" },
-    { question: "What is the Army's official values?", answer: "LDRSHIP - Loyalty, Duty, Respect, Selfless Service, Honor, Integrity, Personal Courage" },
-    { question: "What is the Army's official mission?", answer: "To deploy, fight, and win our nation's wars by providing ready, prompt, and sustained land dominance across the full spectrum of conflict as part of the joint force." },
-    { question: "What is the Army's official vision?", answer: "The Army is the most lethal ground combat force in the world." },
-    { question: "What is the Army's official purpose?", answer: "To fight and win our nation's wars by providing prompt, sustained land dominance across the full range of military operations and spectrum of conflict in support of combatant commanders." },
-    { question: "What is the Army's official function?", answer: "To organize, train, and equip forces for the conduct of prompt and sustained combat operations on land." },
-    { question: "What is the Army's official role?", answer: "To provide the landpower component of the joint force." },
-    { question: "What is the Army's official responsibility?", answer: "To provide the landpower component of the joint force and to fight and win our nation's wars." },
-    { question: "What is the Army's official commitment?", answer: "To provide the landpower component of the joint force and to fight and win our nation's wars by providing prompt, sustained land dominance across the full range of military operations and spectrum of conflict in support of combatant commanders." }
+    { question: "Deadliest war in United States history", answer: "The Civil War"}
 ];
 
 // Initialize flashcards when the page loads
