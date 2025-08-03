@@ -117,8 +117,9 @@ ApexWarriorAcademy.NetworkSimulator = {
                     <div class="connection-guide">
                         <h5>🔗 Connection Guide</h5>
                         <ul>
-                            <li>Click on a device to select it</li>
-                            <li>Click on another device to connect them</li>
+                            <li>Click on a device to select it (it will highlight)</li>
+                            <li>Click on a second device to connect them</li>
+                            <li>Both devices must be selected for connection</li>
                             <li>Valid connections will show in green</li>
                             <li>Invalid connections will show in red</li>
                         </ul>
@@ -348,21 +349,29 @@ ApexWarriorAcademy.NetworkSimulator = {
             return;
         }
         
-        // Deselect all other devices
-        document.querySelectorAll('.network-device').forEach(dev => {
-            dev.classList.remove('selected');
-        });
+        // Get currently selected devices before deselecting
+        const currentlySelected = document.querySelectorAll('.network-device.selected');
+        console.log('Currently selected devices:', currentlySelected.length);
         
-        // Select this device
-        deviceElement.classList.add('selected');
-        this.gameState.selectedDevice = deviceId;
-        console.log('Device selected:', deviceId);
-        
-        // Check if we have two devices selected for connection
-        const selectedDevices = document.querySelectorAll('.network-device.selected');
-        if (selectedDevices.length === 2) {
-            console.log('Two devices selected, attempting connection');
-            this.attemptConnection(deviceId);
+        // If we already have one device selected, keep it and add this one
+        if (currentlySelected.length === 1) {
+            // Select this device (keep the other one selected)
+            deviceElement.classList.add('selected');
+            console.log('Second device selected:', deviceId);
+            
+            // Now we have two devices selected, attempt connection
+            setTimeout(() => {
+                this.attemptConnection(deviceId);
+            }, 100);
+        } else {
+            // First device selection - deselect all others and select this one
+            document.querySelectorAll('.network-device').forEach(dev => {
+                dev.classList.remove('selected');
+            });
+            
+            deviceElement.classList.add('selected');
+            this.gameState.selectedDevice = deviceId;
+            console.log('First device selected:', deviceId);
         }
     },
 

@@ -2914,6 +2914,8 @@ Comprehensive Responsive Design
     border-color: var(--color-accent-light);
     box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.5);
     background: var(--color-accent-hover);
+    transform: scale(1.05);
+    z-index: 15;
 }
 
 .device-header {
