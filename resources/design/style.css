@@ -2734,3 +2734,411 @@ Comprehensive Responsive Design
         font-size: 0.85rem;
     }
 }
+
+/* =====================
+   NETWORK SIMULATOR STYLES
+   ===================== */
+#network-simulator {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.simulator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.simulator-header h3 {
+    margin: 0;
+    color: var(--accent-color);
+    font-size: 1.5rem;
+}
+
+.simulator-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.score {
+    font-weight: 600;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+
+.sim-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.sim-btn:hover {
+    background: #ca8a04;
+}
+
+.simulator-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr 300px;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.device-palette {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.device-palette h4 {
+    margin: 0 0 1rem 0;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.device-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.device-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    cursor: grab;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.device-item:hover {
+    background: #e9ecef;
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.device-item:active {
+    cursor: grabbing;
+}
+
+.device-icon {
+    font-size: 1.5rem;
+}
+
+.device-name {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.network-workspace {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.workspace-header h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.workspace-area {
+    position: relative;
+    min-height: 400px;
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    background: #f8f9fa;
+    overflow: hidden;
+}
+
+.workspace-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.network-device {
+    position: absolute;
+    width: 120px;
+    height: 80px;
+    background: white;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.network-device:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.network-device.selected {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(202, 138, 4, 0.3);
+}
+
+.device-header {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.device-header .device-icon {
+    font-size: 1.2rem;
+}
+
+.device-header .device-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.device-ports {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.port {
+    width: 8px;
+    height: 8px;
+    background: #6c757d;
+    border-radius: 50%;
+    border: 1px solid #495057;
+}
+
+.port.connected {
+    background: #28a745;
+    border-color: #1e7e34;
+}
+
+.device-config {
+    font-size: 0.7rem;
+    color: #6c757d;
+    text-align: center;
+}
+
+.connection-line {
+    position: absolute;
+    height: 3px;
+    background: #dc3545;
+    transform-origin: left center;
+    z-index: 5;
+    transition: background-color 0.3s ease;
+}
+
+.connection-line.valid {
+    background: #28a745;
+}
+
+.network-info {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.network-info h4 {
+    margin: 0 0 1rem 0;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.network-stats {
+    margin-bottom: 1rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.stat-icon {
+    font-size: 1.2rem;
+}
+
+.stat-count {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.stat-name {
+    color: var(--text-color);
+    font-size: 0.8rem;
+}
+
+.connection-guide {
+    background: #e7f3ff;
+    border: 1px solid #b3d9ff;
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.connection-guide h5 {
+    margin: 0 0 0.5rem 0;
+    color: #0056b3;
+    font-size: 0.9rem;
+}
+
+.connection-guide ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    font-size: 0.8rem;
+    color: #0056b3;
+}
+
+.connection-guide li {
+    margin-bottom: 0.25rem;
+}
+
+.scenario-info {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.scenario-info h4 {
+    margin: 0 0 1rem 0;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.scenario-info p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.simulator-message {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Mobile responsiveness for simulator */
+@media (max-width: 768px) {
+    .simulator-layout {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .simulator-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .simulator-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .network-device {
+        width: 100px;
+        height: 70px;
+    }
+    
+    .device-header .device-name {
+        font-size: 0.7rem;
+    }
+    
+    .device-config {
+        font-size: 0.6rem;
+    }
+}
+
+/* Game intro styles */
+.game-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.game-features h3,
+.game-instructions h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.game-features ul,
+.game-instructions ol {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.game-features li,
+.game-instructions li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.game-features strong,
+.game-instructions strong {
+    color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .game-intro {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+}
