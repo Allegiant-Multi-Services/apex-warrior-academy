@@ -92,9 +92,11 @@ body {
 }
 
 /* Hide content by default until authentication is checked */
-main, header, footer {
-  display: none !important;
-  visibility: hidden !important;
+body:not(.authenticated) main,
+body:not(.authenticated) header,
+body:not(.authenticated) footer {
+  display: none;
+  visibility: hidden;
 }
 
 /*=======

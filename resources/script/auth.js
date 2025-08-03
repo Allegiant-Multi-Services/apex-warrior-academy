@@ -261,43 +261,13 @@ class WebsiteAuth {
     }
 
     hideContent() {
-        // Hide main content aggressively
-        const main = document.querySelector('main');
-        const header = document.querySelector('header');
-        const footer = document.querySelector('footer');
-        
-        if (main) {
-            main.style.display = 'none';
-            main.style.visibility = 'hidden';
-        }
-        if (header) {
-            header.style.display = 'none';
-            header.style.visibility = 'hidden';
-        }
-        if (footer) {
-            footer.style.display = 'none';
-            footer.style.visibility = 'hidden';
-        }
+        // Remove authenticated class to hide content
+        document.body.classList.remove('authenticated');
     }
 
     showContent() {
-        // Show main content
-        const main = document.querySelector('main');
-        const header = document.querySelector('header');
-        const footer = document.querySelector('footer');
-        
-        if (main) {
-            main.style.display = 'block';
-            main.style.visibility = 'visible';
-        }
-        if (header) {
-            header.style.display = 'block';
-            header.style.visibility = 'visible';
-        }
-        if (footer) {
-            footer.style.display = 'block';
-            footer.style.visibility = 'visible';
-        }
+        // Add authenticated class to body to show content
+        document.body.classList.add('authenticated');
         
         // Remove any auth overlay if it exists
         this.removeAuthOverlay();
