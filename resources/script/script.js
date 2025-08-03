@@ -125,6 +125,15 @@ ApexWarriorAcademy.Dropdowns = {
       return;
     }
 
+    // Force all dropdowns to be closed on page load
+    dropdowns.forEach(dropdown => {
+      dropdown.classList.remove('active');
+      const toggle = dropdown.querySelector('.dropdown-toggle');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
     dropdowns.forEach(dropdown => {
       const toggle = dropdown.querySelector('.dropdown-toggle');
       const menu = dropdown.querySelector('.dropdown-menu');
@@ -158,11 +167,9 @@ ApexWarriorAcademy.Dropdowns = {
       const submenuLinks = dropdown.querySelectorAll('.dropdown-menu a');
       submenuLinks.forEach(link => {
         link.addEventListener('click', (event) => {
-          // Close the dropdown after a short delay to allow the link to work
-          setTimeout(() => {
-            dropdown.classList.remove('active');
-            toggle.setAttribute('aria-expanded', 'false');
-          }, 100);
+          // Close the dropdown immediately
+          dropdown.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
         });
       });
 
