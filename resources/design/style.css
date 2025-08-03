@@ -2688,3 +2688,49 @@ Comprehensive Responsive Design
         overflow-scrolling: touch;
     }
 }
+
+/* =====================
+   VIDEO CREDIT STYLES
+   ===================== */
+.video-credit {
+    background: rgba(28, 40, 65, 0.05);
+    border-left: 4px solid var(--accent-color);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.video-credit p {
+    margin: 0 0 1rem 0;
+    color: var(--text-color);
+}
+
+.video-credit p:last-child {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.video-credit strong {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.video-credit em {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+    .video-credit {
+        padding: 1rem;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .video-credit p:last-child {
+        font-size: 0.85rem;
+    }
+}
