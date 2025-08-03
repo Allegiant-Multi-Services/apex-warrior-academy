@@ -67,11 +67,12 @@ ApexWarriorAcademy.NetworkSimulator = {
         gameContainer.innerHTML = `
             <div class="simulator-header">
                 <h3>🌐 Network+ Simulation Game</h3>
-                <div class="simulator-controls">
-                    <span class="score">Score: <span id="game-score">0</span></span>
-                    <button id="reset-game" class="sim-btn">Reset</button>
-                    <button id="check-network" class="sim-btn">Check Network</button>
-                </div>
+                                    <div class="simulator-controls">
+                        <span class="score">Score: <span id="game-score">0</span></span>
+                        <button id="reset-game" class="sim-btn">Reset</button>
+                        <button id="check-network" class="sim-btn">Check Network</button>
+                        <button id="test-connection" class="sim-btn">Test Connection</button>
+                    </div>
             </div>
             
             <div class="simulator-layout">
@@ -200,9 +201,11 @@ ApexWarriorAcademy.NetworkSimulator = {
     setupControlButtons: function() {
         const resetBtn = document.getElementById('reset-game');
         const checkBtn = document.getElementById('check-network');
+        const testBtn = document.getElementById('test-connection');
         
         if (resetBtn) resetBtn.addEventListener('click', () => this.resetGame());
         if (checkBtn) checkBtn.addEventListener('click', () => this.checkNetwork());
+        if (testBtn) testBtn.addEventListener('click', () => this.testConnection());
     },
 
     // Handle drag start
@@ -443,12 +446,22 @@ ApexWarriorAcademy.NetworkSimulator = {
 
     // Render connection line
     renderConnection: function(connection) {
+        console.log('Rendering connection:', connection.id);
+        
         const device1 = document.getElementById(connection.device1);
         const device2 = document.getElementById(connection.device2);
         
-        if (!device1 || !device2) return;
+        if (!device1 || !device2) {
+            console.error('Device elements not found for connection');
+            return;
+        }
         
         const workspace = document.getElementById('workspace');
+        if (!workspace) {
+            console.error('Workspace not found');
+            return;
+        }
+        
         const line = document.createElement('div');
         line.className = 'connection-line ' + (connection.valid ? 'valid' : 'invalid');
         line.id = connection.id;
@@ -466,12 +479,31 @@ ApexWarriorAcademy.NetworkSimulator = {
         const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
         const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
         
+        console.log('Line properties:', {
+            length: length,
+            angle: angle,
+            x1: x1,
+            y1: y1,
+            x2: x2,
+            y2: y2,
+            valid: connection.valid
+        });
+        
         line.style.width = length + 'px';
         line.style.left = x1 + 'px';
         line.style.top = y1 + 'px';
         line.style.transform = `rotate(${angle}deg)`;
         
+        // Add some inline styles to ensure visibility
+        line.style.position = 'absolute';
+        line.style.height = '4px';
+        line.style.backgroundColor = connection.valid ? '#27ae60' : '#e74c3c';
+        line.style.borderRadius = '2px';
+        line.style.zIndex = '5';
+        line.style.transformOrigin = 'left center';
+        
         workspace.appendChild(line);
+        console.log('Connection line added to workspace');
     },
 
     // Update score
@@ -601,6 +633,30 @@ ApexWarriorAcademy.NetworkSimulator = {
     testAddDevice: function() {
         console.log('Testing device addition');
         this.addDevice('router', 100, 100);
+    },
+
+    // Test connection rendering
+    testConnection: function() {
+        console.log('Testing connection rendering');
+        
+        // Add two test devices if none exist
+        if (this.gameState.devices.length < 2) {
+            this.addDevice('router', 100, 100);
+            this.addDevice('switch', 300, 100);
+        }
+        
+        // Create a test connection
+        const testConnection = {
+            id: 'test_conn_' + Date.now(),
+            device1: this.gameState.devices[0].id,
+            device2: this.gameState.devices[1].id,
+            valid: true
+        };
+        
+        console.log('Creating test connection:', testConnection);
+        this.gameState.connections.push(testConnection);
+        this.renderConnection(testConnection);
+        this.updateNetworkStats();
     }
 };
 
