@@ -1795,9 +1795,7 @@ Comprehensive Responsive Design
 
 /* Dark Mode Support (if user prefers) */
 @media (prefers-color-scheme: dark) {
-  :root {
-    /* Colors already optimized for dark theme */
-  }
+  /* Colors already optimized for dark theme - no changes needed */
 }
 
 /* Focus Visible for Better Accessibility */
@@ -2606,6 +2604,7 @@ Comprehensive Responsive Design
     .mission-grid,
     .contributors-grid {
         display: -ms-flexbox;
+        flex-wrap: wrap;
         -ms-flex-wrap: wrap;
     }
     
@@ -2616,6 +2615,7 @@ Comprehensive Responsive Design
     .about-grid > *,
     .mission-grid > *,
     .contributors-grid > * {
+        flex: 1 1 350px;
         -ms-flex: 1 1 350px;
         margin: var(--spacing-md);
     }
@@ -2671,7 +2671,7 @@ Comprehensive Responsive Design
     .flashcard-front,
     .flashcard-back {
         -webkit-overflow-scrolling: touch;
-        overflow-scrolling: touch;
+        -webkit-overflow-scrolling: touch;
     }
 }
 
