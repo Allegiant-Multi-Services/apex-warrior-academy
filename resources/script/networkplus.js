@@ -1,7 +1,7 @@
 // =====================
 // FLASHCARD FUNCTIONALITY
 // =====================
-const flashcards = [
+const networkFlashcards = [
     { question: "What is the default administrative distance of RIP?", answer: "120." },
     { question: "True or False: Unshielded twisted-pair (UTP) is commonly used in twisted-pair Ethernet (10BaseT, 100BaseTX, 1000BaseT, and so on).", answer: "True" },
     { question: "True/False: A cache is a collection of data duplicating some original data", answer: "True" },
@@ -54,33 +54,20 @@ const flashcards = [
     // { question: "", answer: "" },
 ];
 
-let currentCard = 0;
-const flashcard = document.getElementById("flashcard");
-const front = document.getElementById("flashcard-front");
-const back = document.getElementById("flashcard-back");
+// Initialize flashcard module when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    // Initialize flashcard module with keyboard functionality
+    const flashcardModule = new FlashcardModule(networkFlashcards, {
+      showCounter: true,
+      autoFlip: false
+    });
 
-function loadCard(index) {
-    front.textContent = flashcards[index].question;
-    back.textContent = flashcards[index].answer;
-    flashcard.classList.remove("flipped");
-}
-
-flashcard.addEventListener("click", () => {
-    flashcard.classList.toggle("flipped");
+    console.log('Network+ flashcard module initialized successfully');
+  } catch (error) {
+    console.error('Error initializing Network+ flashcard module:', error);
+  }
 });
-
-document.getElementById("flash-prev-btn").addEventListener("click", () => {
-    currentCard = (currentCard - 1 + flashcards.length) % flashcards.length;
-    loadCard(currentCard);
-});
-
-document.getElementById("flash-next-btn").addEventListener("click", () => {
-    currentCard = (currentCard + 1) % flashcards.length;
-    loadCard(currentCard);
-});
-
-// Initialize
-loadCard(currentCard);
 
 // =====================
 // PRACTICE TEST FUNCTIONALITY
