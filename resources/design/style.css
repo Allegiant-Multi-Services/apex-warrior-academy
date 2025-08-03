@@ -2709,6 +2709,15 @@ Comprehensive Responsive Design
     padding-bottom: 0.5rem;
 }
 
+.prt-content h6 {
+    color: var(--color-accent);
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
 .prt-content h5:first-child {
     margin-top: 0;
 }
