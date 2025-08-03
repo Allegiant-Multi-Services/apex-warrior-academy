@@ -1,0 +1,31 @@
+{
+  "name": "apex-warrior-academy",
+  "version": "1.0.0",
+  "description": "Military education and IT certification study resources",
+  "main": "index.html",
+  "scripts": {
+    "build": "node build/minify.js",
+    "dev": "python3 -m http.server 8000",
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "echo \"No linter configured\" && exit 0"
+  },
+  "keywords": [
+    "military",
+    "education",
+    "IT",
+    "certification",
+    "Security+",
+    "Network+",
+    "BLC",
+    "Army"
+  ],
+  "author": "Apex Warrior Academy",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Allegiant-Multi-Services/apex-warrior-academy.git"
+  },
+  "homepage": "https://apexwarrioracademy.org"
+} 

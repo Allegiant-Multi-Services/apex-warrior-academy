@@ -24,7 +24,7 @@
   <meta property="og:title" content="Apex Warrior Academy - Empowering the Warfighter Through Knowledge">
   <meta property="og:description" content="Study resources for Security+, Network+, BLC, and Army promotion board preparation.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://apexwarrioracademy.com">
+  <meta property="og:url" content="https://apexwarrioracademy.org">
   <meta property="og:image" content="resources/images/apex_warrior_academy_transparent.png">
   
   <!-- Twitter Card Meta Tags -->
@@ -36,6 +36,10 @@
   <!-- Favicon -->
   <link rel="icon" href="resources/images/apex_warrior_academy_transparent.png" type="image/png" />
   <link rel="apple-touch-icon" href="resources/images/apex_warrior_academy_transparent.png">
+  <!-- Preload critical resources -->
+  <link rel="preload" href="resources/design/style.css?v=1.6" as="style">
+  <link rel="preload" href="resources/images/apex_warrior_academy_transparent.png" as="image">
+  
   <link rel="stylesheet" href="resources/design/style.css?v=1.6">
   <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet" />
   
@@ -101,7 +105,7 @@
         <a href="index.html" class="logo">
           <!-- Improved alt text for accessibility -->
           <img src="resources/images/apex_warrior_academy_transparent.png" alt="Apex Warrior Academy Logo"
-            height="40" loading="lazy" />
+            height="40" loading="lazy" width="40" />
         </a>
       </div>
       <!-- Hamburger Icon -->
@@ -132,7 +136,7 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-logo">
-        <img src="resources/images/apex_warrior_academy_transparent.png" alt="Apex Warrior Academy Logo" />
+        <img src="resources/images/apex_warrior_academy_transparent.png" alt="Apex Warrior Academy Logo" loading="lazy" width="200" height="200" />
       </div>
       <h1 class="hero-title">Empowering the Warfighter Through Knowledge</h1>
       <p class="hero-subtitle">Study smarter. Advance faster.</p>
@@ -199,7 +203,8 @@
     <p>&copy; 2025 Apex Warrior Academy. All rights reserved.</p>
   </footer>
 
-  <script src="resources/script/script.js?v=1.1"></script>
+  <script src="resources/script/script.js?v=1.2"></script>
+  <script src="resources/script/performance.js"></script>
   <script src="resources/script/analytics.js"></script>
   <script src="resources/script/auth.js?v=1.1"></script>
 </body>
