@@ -882,6 +882,8 @@ Board Prep Styles
 
 /* Resources Grid */
 .resources-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: var(--spacing-lg);
@@ -2387,6 +2389,7 @@ Comprehensive Responsive Design
     align-items: center;
     justify-content: center;
     z-index: 9999;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -2401,6 +2404,7 @@ Comprehensive Responsive Design
     border-radius: 20px;
     padding: 3rem;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border: 2px solid var(--color-accent);
 }
@@ -2599,5 +2603,88 @@ Comprehensive Responsive Design
     
     .auth-logo {
         width: 100px;
+    }
+}
+
+/* =====================
+   BROWSER COMPATIBILITY FALLBACKS
+   ===================== */
+
+/* IE11 and older browser support */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .resources-grid,
+    .concepts-grid,
+    .cert-grid,
+    .training-grid,
+    .about-grid,
+    .mission-grid,
+    .contributors-grid {
+        display: -ms-flexbox;
+        -ms-flex-wrap: wrap;
+    }
+    
+    .resources-grid > *,
+    .concepts-grid > *,
+    .cert-grid > *,
+    .training-grid > *,
+    .about-grid > *,
+    .mission-grid > *,
+    .contributors-grid > * {
+        -ms-flex: 1 1 350px;
+        margin: var(--spacing-md);
+    }
+    
+    /* Disable backdrop-filter for IE */
+    #auth-overlay,
+    .auth-box {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        background: rgba(28, 40, 65, 0.98);
+    }
+}
+
+/* Safari specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .flashcard {
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+    
+    .flashcard-inner {
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+}
+
+/* Firefox specific fixes */
+@-moz-document url-prefix() {
+    .flashcard {
+        transform-style: preserve-3d;
+    }
+    
+    .flashcard-inner {
+        transform-style: preserve-3d;
+    }
+}
+
+/* Mobile browser optimizations */
+@media (max-width: 768px) {
+    /* Improve touch targets */
+    .nav-links li a,
+    .auth-btn,
+    .quiz-btn,
+    .nav-btns button {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Optimize for mobile scrolling */
+    .flashcard-front,
+    .flashcard-back {
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
     }
 }
