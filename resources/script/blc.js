@@ -1,7 +1,7 @@
 // =====================
 // FLASHCARD FUNCTIONALITY
 // =====================
-const flashcards = [
+const blcFlashcards = [
     { question: "Troop Leading Procedures", answer: "(1) Receive the Mission. (2) Issues the Warning order. (3) Make a Tentative plan. (4) Initiate movement. (5) Recon the site. (6) Complete the plan. (7) Issue the order. (8) Surpervise and Refine." },
     { question: "OPORD", answer: "(1) Situation. (2) Mission. (3) Execution. (4) Sustainment. (5) Command and signal." },
     { question: "5 Principles of patrolling", answer: "(1) Planning. (2) Recon. (3) Security. (4) Command and control. (5) Common sense." },
@@ -28,33 +28,20 @@ const flashcards = [
     { question: "What is a Nine Line Medevac?", answer: "(1) Location of pickup site. (2) Frequency, call sign, suffix. (3) Number of patients by precedence. (4) Special equipment required. (5) Number patients by type. (6) Security at the pickup site. (7) Method of marking at pickup site. (8) Nationality and Status. (9) NBC." },
 ];
 
-let currentCard = 0;
-const flashcard = document.getElementById("flashcard");
-const front = document.getElementById("flashcard-front");
-const back = document.getElementById("flashcard-back");
+// Initialize flashcard module when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    // Initialize flashcard module with keyboard functionality
+    const flashcardModule = new FlashcardModule(blcFlashcards, {
+      showCounter: true,
+      autoFlip: false
+    });
 
-function loadCard(index) {
-    front.textContent = flashcards[index].question;
-    back.textContent = flashcards[index].answer;
-    flashcard.classList.remove("flipped");
-}
-
-flashcard.addEventListener("click", () => {
-    flashcard.classList.toggle("flipped");
+    console.log('BLC flashcard module initialized successfully');
+  } catch (error) {
+    console.error('Error initializing BLC flashcard module:', error);
+  }
 });
-
-document.getElementById("flash-prev-btn").addEventListener("click", () => {
-    currentCard = (currentCard - 1 + flashcards.length) % flashcards.length;
-    loadCard(currentCard);
-});
-
-document.getElementById("flash-next-btn").addEventListener("click", () => {
-    currentCard = (currentCard + 1) % flashcards.length;
-    loadCard(currentCard);
-});
-
-// Initialize
-loadCard(currentCard);
 
 // =====================
 // PRACTICE TEST FUNCTIONALITY
