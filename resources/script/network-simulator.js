@@ -179,18 +179,20 @@ ApexWarriorAcademy.NetworkSimulator = {
             console.error('Workspace element not found!');
         }
         
-        // Add event delegation as backup
-        document.addEventListener('dragover', (e) => {
-            if (e.target.closest('#workspace')) {
-                this.handleDragOver(e);
-            }
-        });
-        
-        document.addEventListener('drop', (e) => {
-            if (e.target.closest('#workspace')) {
-                this.handleDrop(e);
-            }
-        });
+        // Add event delegation as backup (only if workspace events didn't work)
+        if (!workspace) {
+            document.addEventListener('dragover', (e) => {
+                if (e.target.closest('#workspace')) {
+                    this.handleDragOver(e);
+                }
+            });
+            
+            document.addEventListener('drop', (e) => {
+                if (e.target.closest('#workspace')) {
+                    this.handleDrop(e);
+                }
+            });
+        }
     },
 
     // Setup control buttons
@@ -258,7 +260,10 @@ ApexWarriorAcademy.NetworkSimulator = {
         
         console.log('Drop position:', x, y);
         
-        this.addDevice(deviceType, x, y);
+        // Prevent duplicate drops by checking if this is a valid drop
+        if (deviceType && this.deviceTypes[deviceType]) {
+            this.addDevice(deviceType, x, y);
+        }
         
         // Remove drag-over class
         workspace.classList.remove('drag-over');
@@ -282,6 +287,7 @@ ApexWarriorAcademy.NetworkSimulator = {
         this.gameState.devices.push(device);
         this.renderDevice(device);
         this.updateNetworkStats();
+        console.log('Device added:', type, 'Total devices:', this.gameState.devices.length);
     },
 
     // Render device on workspace
@@ -328,46 +334,69 @@ ApexWarriorAcademy.NetworkSimulator = {
     // Select device
     selectDevice: function(deviceId, event) {
         event.stopPropagation();
+        console.log('Device clicked:', deviceId);
         
-        // Deselect previous device
+        // Check if this device is already selected
+        const deviceElement = document.getElementById(deviceId);
+        if (!deviceElement) return;
+        
+        if (deviceElement.classList.contains('selected')) {
+            // Deselect if already selected
+            deviceElement.classList.remove('selected');
+            this.gameState.selectedDevice = null;
+            console.log('Device deselected');
+            return;
+        }
+        
+        // Deselect all other devices
         document.querySelectorAll('.network-device').forEach(dev => {
             dev.classList.remove('selected');
         });
         
-        // Select new device
-        const deviceElement = document.getElementById(deviceId);
-        if (deviceElement) {
-            deviceElement.classList.add('selected');
-            this.gameState.selectedDevice = deviceId;
-            
-            // If another device was already selected, try to connect
-            if (this.gameState.devices.length > 1) {
-                this.attemptConnection(deviceId);
-            }
+        // Select this device
+        deviceElement.classList.add('selected');
+        this.gameState.selectedDevice = deviceId;
+        console.log('Device selected:', deviceId);
+        
+        // Check if we have two devices selected for connection
+        const selectedDevices = document.querySelectorAll('.network-device.selected');
+        if (selectedDevices.length === 2) {
+            console.log('Two devices selected, attempting connection');
+            this.attemptConnection(deviceId);
         }
     },
 
     // Attempt connection between devices
     attemptConnection: function(deviceId) {
         const selectedDevices = document.querySelectorAll('.network-device.selected');
+        console.log('Attempting connection with', selectedDevices.length, 'selected devices');
+        
         if (selectedDevices.length === 2) {
             const device1 = selectedDevices[0].id;
             const device2 = selectedDevices[1].id;
             
+            console.log('Connecting devices:', device1, 'and', device2);
+            
             if (device1 !== device2) {
                 this.connectDevices(device1, device2);
+            } else {
+                console.log('Cannot connect device to itself');
             }
         }
     },
 
     // Connect two devices
     connectDevices: function(device1Id, device2Id) {
+        console.log('Creating connection between:', device1Id, 'and', device2Id);
+        
         const connection = {
             id: 'conn_' + Date.now(),
             device1: device1Id,
             device2: device2Id,
             valid: this.validateConnection(device1Id, device2Id)
         };
+        
+        console.log('Connection valid:', connection.valid);
         
         this.gameState.connections.push(connection);
         this.renderConnection(connection);
@@ -378,6 +407,9 @@ ApexWarriorAcademy.NetworkSimulator = {
             dev.classList.remove('selected');
         });
         this.gameState.selectedDevice = null;
+        
+        // Update stats after connection
+        this.updateNetworkStats();
     },
 
     // Validate connection
