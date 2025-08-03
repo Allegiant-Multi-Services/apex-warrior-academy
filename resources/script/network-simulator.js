@@ -51,7 +51,10 @@ ApexWarriorAcademy.NetworkSimulator = {
     // Initialize the simulator
     init: function() {
         this.createGameInterface();
-        this.setupEventListeners();
+        // Wait a bit for DOM to be ready, then setup events
+        setTimeout(() => {
+            this.setupEventListeners();
+        }, 100);
         this.loadScenario(0);
         console.log('Network Simulator initialized');
     },
@@ -135,11 +138,18 @@ ApexWarriorAcademy.NetworkSimulator = {
 
     // Setup event listeners
     setupEventListeners: function() {
-        // Device palette drag events
-        document.addEventListener('DOMContentLoaded', () => {
-            this.setupDragAndDrop();
-            this.setupControlButtons();
-        });
+        // Try immediate setup first
+        this.setupDragAndDrop();
+        this.setupControlButtons();
+        
+        // Also try with DOMContentLoaded as fallback
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                console.log('DOMContentLoaded - retrying setup');
+                this.setupDragAndDrop();
+                this.setupControlButtons();
+            });
+        }
     },
 
     // Setup drag and drop functionality
@@ -147,20 +157,40 @@ ApexWarriorAcademy.NetworkSimulator = {
         const deviceItems = document.querySelectorAll('.device-item');
         const workspace = document.getElementById('workspace');
         
+        console.log('Found device items:', deviceItems.length);
+        console.log('Found workspace:', workspace);
+        
         // Setup device items for dragging
         deviceItems.forEach(item => {
+            console.log('Setting up drag for:', item.dataset.type);
             item.addEventListener('dragstart', (e) => this.handleDragStart(e));
             item.addEventListener('dragend', (e) => this.handleDragEnd(e));
         });
         
         // Setup workspace for dropping
         if (workspace) {
+            console.log('Setting up workspace drop events');
             workspace.addEventListener('dragover', (e) => this.handleDragOver(e));
             workspace.addEventListener('dragenter', (e) => this.handleDragEnter(e));
             workspace.addEventListener('dragleave', (e) => this.handleDragLeave(e));
             workspace.addEventListener('drop', (e) => this.handleDrop(e));
             workspace.addEventListener('click', (e) => this.handleWorkspaceClick(e));
+        } else {
+            console.error('Workspace element not found!');
         }
+        
+        // Add event delegation as backup
+        document.addEventListener('dragover', (e) => {
+            if (e.target.closest('#workspace')) {
+                this.handleDragOver(e);
+            }
+        });
+        
+        document.addEventListener('drop', (e) => {
+            if (e.target.closest('#workspace')) {
+                this.handleDrop(e);
+            }
+        });
     },
 
     // Setup control buttons
@@ -524,6 +554,12 @@ ApexWarriorAcademy.NetworkSimulator = {
             });
             this.gameState.selectedDevice = null;
         }
+    },
+
+    // Test function to manually add a device (for debugging)
+    testAddDevice: function() {
+        console.log('Testing device addition');
+        this.addDevice('router', 100, 100);
     }
 };
 
