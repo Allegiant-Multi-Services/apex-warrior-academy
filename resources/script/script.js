@@ -153,6 +153,18 @@ ApexWarriorAcademy.Dropdowns = {
         toggle.setAttribute('aria-expanded', isExpanded);
       });
 
+      // Close dropdown when clicking on submenu items
+      const submenuLinks = dropdown.querySelectorAll('.dropdown-menu a');
+      submenuLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+          // Close the dropdown after a short delay to allow the link to work
+          setTimeout(() => {
+            dropdown.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+          }, 100);
+        });
+      });
+
       // Close dropdown when clicking outside
       document.addEventListener('click', (event) => {
         if (!dropdown.contains(event.target)) {
