@@ -56,10 +56,11 @@ ApexWarriorAcademy.Navigation = {
       if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
         link.classList.add('active');
         
-        // Handle dropdown active state
+        // Handle dropdown active state - but don't open the dropdown automatically
         const dropdown = link.closest('.dropdown');
         if (dropdown) {
-          dropdown.classList.add('active');
+          // Only mark as active for styling, but don't open the dropdown
+          // The dropdown will remain closed until user clicks the toggle
         }
       }
     });
