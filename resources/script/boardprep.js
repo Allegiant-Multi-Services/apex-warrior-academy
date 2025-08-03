@@ -159,15 +159,45 @@ const boardPrepFlashcards = [
 document.addEventListener('DOMContentLoaded', function() {
     // Debug: Log the number of flashcards
     console.log('Total flashcards loaded:', boardPrepFlashcards.length);
-    console.log('Flashcards:', boardPrepFlashcards);
+    
+    // Check for any invalid flashcards and remove duplicates
+    const validFlashcards = boardPrepFlashcards.filter(card => {
+        if (!card.question || !card.answer) {
+            console.warn('Invalid flashcard found:', card);
+            return false;
+        }
+        return true;
+    });
+    
+    // Remove duplicate questions
+    const uniqueFlashcards = [];
+    const seenQuestions = new Set();
+    
+    validFlashcards.forEach(card => {
+        const questionKey = card.question.toLowerCase().trim();
+        if (!seenQuestions.has(questionKey)) {
+            seenQuestions.add(questionKey);
+            uniqueFlashcards.push(card);
+        } else {
+            console.warn('Duplicate question found:', card.question);
+        }
+    });
+    
+    console.log('Unique flashcards after removing duplicates:', uniqueFlashcards.length);
+    
+    console.log('Valid flashcards:', validFlashcards.length);
+    console.log('Unique flashcards:', uniqueFlashcards.length);
+    console.log('Flashcards:', uniqueFlashcards);
     
     // Initialize the flashcard module with board prep content
     if (typeof FlashcardModule !== 'undefined') {
-        new FlashcardModule(boardPrepFlashcards, {
+        console.log('Using FlashcardModule');
+        new FlashcardModule(uniqueFlashcards, {
             autoFlip: false,
             showCounter: true
         });
     } else {
+        console.log('Using fallback flashcard system');
         // Fallback to basic flashcard functionality if module not available
         initializeBasicFlashcards();
     }
