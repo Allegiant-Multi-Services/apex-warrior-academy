@@ -2871,6 +2871,13 @@ Comprehensive Responsive Design
     border-radius: 8px;
     background: var(--color-primary);
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.workspace-area.drag-over {
+    border-color: var(--color-accent);
+    background: var(--color-secondary);
+    box-shadow: 0 0 20px rgba(202, 138, 4, 0.3);
 }
 
 .workspace-placeholder {

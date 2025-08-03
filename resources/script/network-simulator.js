@@ -137,26 +137,39 @@ ApexWarriorAcademy.NetworkSimulator = {
     setupEventListeners: function() {
         // Device palette drag events
         document.addEventListener('DOMContentLoaded', () => {
-            const deviceItems = document.querySelectorAll('.device-item');
-            const workspace = document.getElementById('workspace');
-            
-            deviceItems.forEach(item => {
-                item.addEventListener('dragstart', (e) => this.handleDragStart(e));
-            });
-            
-            if (workspace) {
-                workspace.addEventListener('dragover', (e) => this.handleDragOver(e));
-                workspace.addEventListener('drop', (e) => this.handleDrop(e));
-                workspace.addEventListener('click', (e) => this.handleWorkspaceClick(e));
-            }
-            
-            // Control buttons
-            const resetBtn = document.getElementById('reset-game');
-            const checkBtn = document.getElementById('check-network');
-            
-            if (resetBtn) resetBtn.addEventListener('click', () => this.resetGame());
-            if (checkBtn) checkBtn.addEventListener('click', () => this.checkNetwork());
+            this.setupDragAndDrop();
+            this.setupControlButtons();
         });
+    },
+
+    // Setup drag and drop functionality
+    setupDragAndDrop: function() {
+        const deviceItems = document.querySelectorAll('.device-item');
+        const workspace = document.getElementById('workspace');
+        
+        // Setup device items for dragging
+        deviceItems.forEach(item => {
+            item.addEventListener('dragstart', (e) => this.handleDragStart(e));
+            item.addEventListener('dragend', (e) => this.handleDragEnd(e));
+        });
+        
+        // Setup workspace for dropping
+        if (workspace) {
+            workspace.addEventListener('dragover', (e) => this.handleDragOver(e));
+            workspace.addEventListener('dragenter', (e) => this.handleDragEnter(e));
+            workspace.addEventListener('dragleave', (e) => this.handleDragLeave(e));
+            workspace.addEventListener('drop', (e) => this.handleDrop(e));
+            workspace.addEventListener('click', (e) => this.handleWorkspaceClick(e));
+        }
+    },
+
+    // Setup control buttons
+    setupControlButtons: function() {
+        const resetBtn = document.getElementById('reset-game');
+        const checkBtn = document.getElementById('check-network');
+        
+        if (resetBtn) resetBtn.addEventListener('click', () => this.resetGame());
+        if (checkBtn) checkBtn.addEventListener('click', () => this.checkNetwork());
     },
 
     // Handle drag start
@@ -169,17 +182,56 @@ ApexWarriorAcademy.NetworkSimulator = {
     // Handle drag over
     handleDragOver: function(e) {
         e.preventDefault();
+        e.dataTransfer.dropEffect = 'copy';
+    },
+
+    // Handle drag enter
+    handleDragEnter: function(e) {
+        e.preventDefault();
+        const workspace = document.getElementById('workspace');
+        workspace.classList.add('drag-over');
+    },
+
+    // Handle drag leave
+    handleDragLeave: function(e) {
+        e.preventDefault();
+        const workspace = document.getElementById('workspace');
+        workspace.classList.remove('drag-over');
+    },
+
+    // Handle drag end
+    handleDragEnd: function(e) {
+        e.preventDefault();
+        const draggedItem = e.target;
+        if (draggedItem) {
+            draggedItem.style.opacity = '1';
+        }
     },
 
     // Handle drop
     handleDrop: function(e) {
         e.preventDefault();
+        console.log('Drop event triggered');
+        
         const deviceType = e.dataTransfer.getData('text/plain');
-        const rect = e.target.getBoundingClientRect();
+        console.log('Device type:', deviceType);
+        
+        const workspace = document.getElementById('workspace');
+        if (!workspace) {
+            console.error('Workspace not found');
+            return;
+        }
+        
+        const rect = workspace.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         
+        console.log('Drop position:', x, y);
+        
         this.addDevice(deviceType, x, y);
+        
+        // Remove drag-over class
+        workspace.classList.remove('drag-over');
         
         // Reset drag opacity
         const draggedItem = document.querySelector('.device-item[data-type="' + deviceType + '"]');
