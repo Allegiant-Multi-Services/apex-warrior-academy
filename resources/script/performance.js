@@ -12,11 +12,6 @@ ApexWarriorAcademy.Performance = {
     this.setupIntersectionObserver();
     this.monitorPerformance();
     this.optimizeImages();
-    this.setupServiceWorker();
-    this.optimizeFonts();
-    this.preloadCriticalResources();
-    this.setupResourceHints();
-    this.optimizeThirdPartyScripts();
   },
 
   // Setup lazy loading for images
@@ -147,85 +142,9 @@ ApexWarriorAcademy.Performance = {
     }
   },
 
-  // Preload critical resources
-  preloadCriticalResources: function() {
-    const criticalResources = [
-      'resources/design/style.css',
-      'resources/images/apex_warrior_academy_transparent.png'
-    ];
 
-    criticalResources.forEach(resource => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.href = resource;
-      link.as = resource.endsWith('.css') ? 'style' : 'image';
-      document.head.appendChild(link);
-    });
-  },
 
-  // Optimize fonts loading
-  optimizeFonts: function() {
-    // Add font-display: swap to Google Fonts
-    const fontLink = document.querySelector('link[href*="fonts.googleapis.com"]');
-    if (fontLink) {
-      fontLink.href += '&display=swap';
-    }
-    
-    // Preload critical fonts
-    const fontPreload = document.createElement('link');
-    fontPreload.rel = 'preload';
-    fontPreload.href = 'https://fonts.gstatic.com/s/staatliches/v11/HI_OiY8KO6hqQug7w2KvZz8.woff2';
-    fontPreload.as = 'font';
-    fontPreload.type = 'font/woff2';
-    fontPreload.crossOrigin = 'anonymous';
-    document.head.appendChild(fontPreload);
-  },
 
-  // Setup service worker for caching
-  setupServiceWorker: function() {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(registration => {
-            console.log('SW registered: ', registration);
-          })
-          .catch(registrationError => {
-            console.log('SW registration failed: ', registrationError);
-          });
-      });
-    }
-  },
-
-  // Setup resource hints for better performance
-  setupResourceHints: function() {
-    // DNS prefetch for external domains
-    const dnsPrefetch = document.createElement('link');
-    dnsPrefetch.rel = 'dns-prefetch';
-    dnsPrefetch.href = 'https://fonts.googleapis.com';
-    document.head.appendChild(dnsPrefetch);
-
-    const dnsPrefetch2 = document.createElement('link');
-    dnsPrefetch2.rel = 'dns-prefetch';
-    dnsPrefetch2.href = 'https://fonts.gstatic.com';
-    document.head.appendChild(dnsPrefetch2);
-
-    // Preconnect to critical domains
-    const preconnect = document.createElement('link');
-    preconnect.rel = 'preconnect';
-    preconnect.href = 'https://fonts.googleapis.com';
-    document.head.appendChild(preconnect);
-  },
-
-  // Optimize third-party scripts
-  optimizeThirdPartyScripts: function() {
-    // Defer non-critical third-party scripts
-    const thirdPartyScripts = document.querySelectorAll('script[src*="youtube"], script[src*="analytics"]');
-    thirdPartyScripts.forEach(script => {
-      if (!script.hasAttribute('defer') && !script.hasAttribute('async')) {
-        script.setAttribute('defer', '');
-      }
-    });
-  },
 
   // Debounce function for performance
   debounce: function(func, wait) {
