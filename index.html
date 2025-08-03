@@ -37,10 +37,27 @@
   <link rel="icon" href="resources/images/apex_warrior_academy_transparent.png" type="image/png" />
   <link rel="apple-touch-icon" href="resources/images/apex_warrior_academy_transparent.png">
   <!-- Preload critical resources -->
-      <link rel="preload" href="resources/design/style.css?v=3.0" as="style">
+  <link rel="preload" href="resources/design/style.css?v=3.0" as="style">
   <link rel="preload" href="resources/images/apex_warrior_academy_transparent.png" as="image">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" as="style">
   
-      <link rel="stylesheet" href="resources/design/style.css?v=3.0">
+  <!-- Critical CSS inline for above-the-fold content -->
+  <style>
+    /* Critical CSS for immediate rendering */
+    :root {
+      --color-primary: #0f172a;
+      --color-secondary: #1e293b;
+      --color-accent: #ca8a04;
+      --color-text: #f8fafc;
+      --font-heading: 'Staatliches', 'Segoe UI', sans-serif;
+    }
+    body { background-color: var(--color-primary); color: var(--color-text); margin: 0; font-family: 'Segoe UI', sans-serif; }
+    .navbar { background: var(--color-secondary); border-bottom: 2px solid var(--color-accent); position: sticky; top: 0; z-index: 1000; }
+    .hero { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+    .hero-title { font-size: 3rem; font-weight: 700; color: var(--color-accent); font-family: var(--font-heading); }
+  </style>
+  
+  <link rel="stylesheet" href="resources/design/style.css?v=3.0">
   <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet" />
   
   <!-- Structured Data for SEO -->
@@ -203,10 +220,27 @@
     <p>&copy; 2025 Apex Warrior Academy. All rights reserved.</p>
   </footer>
 
-      <script src="resources/script/script.js?v=2.0"></script>
-  <script src="resources/script/performance.js"></script>
-  <script src="resources/script/analytics.js"></script>
-  <script src="resources/script/auth.js?v=1.1"></script>
+  <!-- Critical JavaScript inline -->
+  <script>
+    // Critical JS for immediate functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Basic navigation functionality
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('nav-links');
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+          navLinks.classList.toggle('show');
+          hamburger.setAttribute('aria-expanded', navLinks.classList.contains('show'));
+        });
+      }
+    });
+  </script>
+  
+  <!-- Non-critical scripts loaded asynchronously -->
+  <script src="resources/script/script.js?v=2.0" defer></script>
+  <script src="resources/script/performance.js" defer></script>
+  <script src="resources/script/analytics.js" defer></script>
+  <script src="resources/script/auth.js?v=1.1" defer></script>
 </body>
 
 </html>

@@ -7,7 +7,10 @@
     "build": "node build/minify.js",
     "dev": "python3 -m http.server 8000",
     "test": "echo \"No tests specified\" && exit 0",
-    "lint": "echo \"No linter configured\" && exit 0"
+    "lint": "echo \"No linter configured\" && exit 0",
+    "audit": "node build/performance-audit.js",
+    "optimize": "node build/optimize-images.js",
+    "analyze": "npm run audit && npm run optimize"
   },
   "keywords": [
     "military",
