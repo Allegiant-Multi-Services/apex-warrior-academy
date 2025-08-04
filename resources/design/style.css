@@ -2794,4 +2794,252 @@ Comprehensive Responsive Design
     }
 }
 
+/* =====================
+   NETWORKING CONTENT STYLES
+   ===================== */
+
+/* Formula Grid */
+.formula-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.formula-item {
+    background: var(--color-tertiary);
+    border: 1px solid var(--color-accent);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.formula-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.formula-item h4 {
+    color: var(--color-accent);
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.formula-item p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.formula-item strong {
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.formula-item em {
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
+/* Network Info Grid */
+.network-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.info-item {
+    background: var(--color-tertiary);
+    border: 1px solid var(--color-accent);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.info-item h4 {
+    color: var(--color-accent);
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.info-item ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.info-item li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.info-item strong {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+/* CIDR Table */
+.table-container {
+    overflow-x: auto;
+    margin: 1rem 0;
+    border-radius: 8px;
+    border: 1px solid var(--color-accent);
+}
+
+.cidr-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-card-bg);
+}
+
+.cidr-table th {
+    background: var(--color-accent);
+    color: var(--color-primary);
+    padding: 0.75rem;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-accent);
+}
+
+.cidr-table td {
+    padding: 0.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.cidr-table tr:hover {
+    background: var(--color-tertiary);
+}
+
+.cidr-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Topology Grid */
+.topology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.topology-card {
+    background: var(--color-tertiary);
+    border: 1px solid var(--color-accent);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.topology-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.topology-card h3 {
+    color: var(--color-accent);
+    margin: 0 0 1.5rem 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 0.75rem;
+}
+
+.topology-content h4 {
+    color: var(--color-accent);
+    margin: 1.5rem 0 0.75rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.topology-content h4:first-child {
+    margin-top: 0;
+}
+
+.topology-content p {
+    margin: 0.5rem 0 1rem 0;
+    line-height: 1.6;
+    color: var(--color-text);
+}
+
+.topology-content ul {
+    margin: 0.5rem 0 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.topology-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    color: var(--color-text);
+}
+
+/* Responsive Design for Networking Content */
+@media (max-width: 768px) {
+    .formula-grid,
+    .network-info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .formula-item,
+    .info-item {
+        padding: 1rem;
+    }
+    
+    .topology-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .topology-card {
+        padding: 1.5rem;
+    }
+    
+    .topology-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .cidr-table {
+        font-size: 0.8rem;
+    }
+    
+    .cidr-table th,
+    .cidr-table td {
+        padding: 0.5rem 0.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .formula-item,
+    .info-item {
+        padding: 0.75rem;
+    }
+    
+    .topology-card {
+        padding: 1rem;
+    }
+    
+    .topology-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .cidr-table {
+        font-size: 0.75rem;
+    }
+    
+    .cidr-table th,
+    .cidr-table td {
+        padding: 0.25rem 0.125rem;
+    }
+}
+
 
